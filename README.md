@@ -215,17 +215,13 @@ streamlit run streamlit_app.py
 
 ---
 
-## Deliverables Summary
+## Deliverables & Submission Summary
 
-| Task / Artifact | Document Reference | Description |
+| Deliverable | Location / Reference | Description |
 | :--- | :--- | :--- |
-| **Task A Report** | [`docs/TaskA_Architecture_Design.md`](docs/TaskA_Architecture_Design.md) | High-level system architecture, Lambda vs. Kappa trade-off matrix, and 15-point Government Architecture Readiness Checklist. |
-| **Task B Report** | [`docs/TaskB_Kafka_Ingestion.md`](docs/TaskB_Kafka_Ingestion.md) | Kafka cluster setup documentation, retention justifications, producer semantics, priority consumer lag analysis, Faust enrichment, and DLQ report. |
-| **Task C Report** | [`docs/TaskC_Flink_Spark_Processing.md`](docs/TaskC_Flink_Spark_Processing.md) | PyFlink CEP pattern implementations, Spark Structured Streaming & Streaming SQL queries, and comparative engine evaluation. |
-| **Consolidated PDF** | [`docs/pdf/UrbanPulse_Technical_Report.pdf`](docs/pdf/UrbanPulse_Technical_Report.pdf) | Unified PDF report compiled from markdown source files. |
-| **Interactive Dashboard** | [`streamlit_app.py`](streamlit_app.py) | Streamlit dashboard for process lifecycle management and serving layer verification. |
+| **Consolidated PDF Report** | [`Report.pdf`](Report.pdf) / [`docs/pdf/UrbanPulse_Technical_Report.pdf`](docs/pdf/UrbanPulse_Technical_Report.pdf) | Comprehensive PDF report covering all Task A, Task B, and Task C requirements. |
+| **Source Code Repository** | [GitHub Repository](https://github.com/Verathagnus/urbanpulse.git) | Complete source code organized by pipeline stage (Kafka, PyFlink, Spark, Faust, Streamlit). |
+| **End-to-End Video Demonstration** | [Google Drive Video Link](https://drive.google.com/file/d/1zmVh6CHo0g664dBjp4BMzR4cCdlrr8fY/view?usp=sharing) | Walkthrough video demonstrating the end-to-end working platform with spoken design logic. |
+| **Interactive Test Console** | [`streamlit_app.py`](streamlit_app.py) | Streamlit dashboard for process lifecycle management and serving layer verification. |
 
 ---
-
-## License & Compliance
-This software stack complies with Open Source Initiative (OSI) approved licenses (`Apache-2.0`, `AGPL-3.0`, `GPL-2.0`) in accordance with municipal open-source procurement standards.
