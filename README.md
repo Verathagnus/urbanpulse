@@ -74,15 +74,15 @@ SPA/
 
 ## Technical Stack
 
-| Component | Technology | Version | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Messaging Infrastructure** | Apache Kafka (KRaft mode) | 7.6.0 | 3-broker distributed ingestion cluster (no ZooKeeper dependency) |
-| **Speed Processing Engine** | Apache Flink | 1.18.1 | Sub-second stateful incident detection (RocksDB state backend) |
-| **Batch / Micro-Batch Engine** | Apache Spark | 3.5.0 | Structured Streaming aggregations and Streaming SQL joins |
-| **Stream-Table Enrichment** | Faust Streaming | 0.11.0 | Python stream processing framework for KTable joins |
-| **Time-Series Storage** | TimescaleDB | PostgreSQL 16 | Hypertable indexing for time-series sensor telemetry |
-| **Geospatial & Cold Storage** | PostGIS / Parquet on MinIO | S3-compatible | Spatial indexing and partitioned historical Parquet storage |
-| **Visualization & Management** | Streamlit / Grafana | 1.32.0 / 10.4.0 | Interactive testing dashboard and municipal web console |
+| Component | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Messaging Infrastructure** | Apache Kafka (KRaft mode) | 3-broker distributed ingestion cluster (no ZooKeeper dependency) |
+| **Speed Processing Engine** | Apache Flink | Sub-second stateful incident detection (RocksDB state backend) |
+| **Batch / Micro-Batch Engine** | Apache Spark | Structured Streaming aggregations and Streaming SQL joins |
+| **Stream-Table Enrichment** | Faust Streaming | Python stream processing framework for KTable joins |
+| **Time-Series Storage** | TimescaleDB | Hypertable indexing for time-series sensor telemetry |
+| **Geospatial & Cold Storage** | PostGIS / Parquet on MinIO | Spatial indexing and partitioned historical Parquet storage |
+| **Visualization & Management** | Streamlit / Grafana | Interactive testing dashboard and municipal web console |
 
 ---
 
@@ -91,7 +91,7 @@ SPA/
 ### 1. Prerequisites
 - Operating System: Linux or Windows 10+ (PowerShell / WSL)
 - Docker Engine 24.0+ and Docker Compose v2.0+
-- Python 3.10+ with `pip` and virtual environment support
+- Python 3.10 with `pip` and virtual environment support
 - Recommended Hardware: x64 architecture, 8 Core CPU, 16 GB RAM, 20 GB free disk space
 
 ### 2. Environment Setup
