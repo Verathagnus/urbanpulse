@@ -2,6 +2,8 @@
 
 ## Github Link: https://github.com/Verathagnus/urbanpulse.git
 
+## Video Demonstration Link: https://drive.google.com/file/d/1zmVh6CHo0g664dBjp4BMzR4cCdlrr8fY/view?usp=sharing
+
 ## System Overview
 
 UrbanPulse is a distributed stream processing and analytics platform developed for the municipal administration of MetroConnect. The platform ingests telemetry from four urban infrastructure streams:

@@ -9,7 +9,7 @@
 ---
 ## Github Link: https://github.com/Verathagnus/urbanpulse.git
 
-## Video Link: https://drive.google.com/file/d/1zmVh6CHo0g664dBjp4BMzR4cCdlrr8fY/view?usp=sharing
+## Video Demonstration Link: https://drive.google.com/file/d/1zmVh6CHo0g664dBjp4BMzR4cCdlrr8fY/view?usp=sharing
 
 ## Group 36 — Team Contribution Table
 
