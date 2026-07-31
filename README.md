@@ -96,7 +96,7 @@ SPA/
 
 ### 2. Environment Setup
 ```bash
-git clone <repository_url>
+git clone https://github.com/Verathagnus/urbanpulse.git
 cd SPA
 python -m venv venv
 source venv/bin/activate  # On Windows: .\venv\Scripts\Activate.ps1
