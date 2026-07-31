@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'flowchart': {'rankSpacing': 45, 'nodeSpacing': 15, 'curve': 'basis'}, 'themeVariables': {'subgraphPadding': 25}}}%%
+flowchart LR
+    subgraph TOPIC["Topic: urbanpulse.traffic_signals (6 Partitions)<br/>"]
+        direction TB
+        P0["Partition 0"]
+        P1["Partition 1"]
+        P2["Partition 2"]
+        P3["Partition 3"]
+        P4["Partition 4"]
+        P5["Partition 5"]
+    end
+
+    subgraph STD["STANDARD_ANALYTICS_DASHBOARD (3 Consumers)<br/>"]
+        direction TB
+        C_STD1["standard-analytics-dashboard-1\nReads: P0, P1 | Delay: 200 ms"]
+        C_STD2["standard-analytics-dashboard-2\nReads: P2, P3 | Delay: 200 ms"]
+        C_STD3["standard-analytics-dashboard-3\nReads: P4, P5 | Delay: 200 ms"]
+    end
+
+    subgraph HIGH["HIGH_PRIORITY_SIGNAL_CONTROL (1 Consumer)<br/>"]
+        C_HIGH["high-priority-signal-ctrl-1\nReads: P0, P1, P2, P3, P4, P5\nProcessing Delay: 0 ms\nTarget: Adaptive Signal Timing (< 90s)"]
+    end
+
+    P0 --> C_STD1
+    P1 --> C_STD1
+    P2 --> C_STD2
+    P3 --> C_STD2
+    P4 --> C_STD3
+    P5 --> C_STD3
+
+    P0 & P1 & P2 & P3 & P4 & P5 --> C_HIGH

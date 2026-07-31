@@ -1,0 +1,246 @@
+# UrbanPulse — Docker Compose Infrastructure
+# 3-Broker Kafka KRaft Cluster + Flink + Spark + TimescaleDB + MinIO
+# All open-source components per Smart Cities Mission mandate
+
+services:
+  # ============================================================
+  # KAFKA CLUSTER — 3 Brokers in KRaft Mode (No ZooKeeper)
+  # ============================================================
+  kafka-broker-1:
+    image: confluentinc/cp-kafka:7.6.0
+    hostname: kafka-broker-1
+    container_name: urbanpulse-kafka-1
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-1:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-broker-1:9093,2@kafka-broker-2:9093,3@kafka-broker-3:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_NUM_PARTITIONS: 6
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_JMX_PORT: 9101
+      CLUSTER_ID: 'jCap02_jSwmSsRE-hKyQlg'
+    volumes:
+      - kafka-data-1:/var/lib/kafka/data
+      - ../kafka/config:/opt/kafka:ro
+    networks:
+      - urbanpulse-network
+
+  kafka-broker-2:
+    image: confluentinc/cp-kafka:7.6.0
+    hostname: kafka-broker-2
+    container_name: urbanpulse-kafka-2
+    ports:
+      - "9094:9094"
+      - "29094:29094"
+    environment:
+      KAFKA_NODE_ID: 2
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-2:29094,PLAINTEXT_HOST://localhost:9094
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29094,CONTROLLER://0.0.0.0:9093,PLAINTEXT_HOST://0.0.0.0:9094
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-broker-1:9093,2@kafka-broker-2:9093,3@kafka-broker-3:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_JMX_PORT: 9101
+      CLUSTER_ID: 'jCap02_jSwmSsRE-hKyQlg'
+    volumes:
+      - kafka-data-2:/var/lib/kafka/data
+    networks:
+      - urbanpulse-network
+
+  kafka-broker-3:
+    image: confluentinc/cp-kafka:7.6.0
+    hostname: kafka-broker-3
+    container_name: urbanpulse-kafka-3
+    ports:
+      - "9096:9096"
+      - "29096:29096"
+    environment:
+      KAFKA_NODE_ID: 3
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-3:29096,PLAINTEXT_HOST://localhost:9096
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29096,CONTROLLER://0.0.0.0:9093,PLAINTEXT_HOST://0.0.0.0:9096
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-broker-1:9093,2@kafka-broker-2:9093,3@kafka-broker-3:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_JMX_PORT: 9101
+      CLUSTER_ID: 'jCap02_jSwmSsRE-hKyQlg'
+    volumes:
+      - kafka-data-3:/var/lib/kafka/data
+    networks:
+      - urbanpulse-network
+
+  # ============================================================
+  # FLINK — JobManager + TaskManager for Real-Time Incident Detection
+  # ============================================================
+  flink-jobmanager:
+    image: flink:1.18-java11
+    hostname: flink-jobmanager
+    container_name: urbanpulse-flink-jm
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        state.backend: rocksdb
+        state.checkpoints.dir: file:///opt/flink/checkpoints
+        state.savepoints.dir: file:///opt/flink/savepoints
+        execution.checkpointing.interval: 300000
+        execution.checkpointing.mode: EXACTLY_ONCE
+        restart-strategy: fixed-delay
+        restart-strategy.fixed-delay.attempts: 3
+        restart-strategy.fixed-delay.delay: 10s
+    volumes:
+      - flink-checkpoints:/opt/flink/checkpoints
+      - flink-savepoints:/opt/flink/savepoints
+    networks:
+      - urbanpulse-network
+
+  flink-taskmanager:
+    image: flink:1.18-java11
+    hostname: flink-taskmanager
+    container_name: urbanpulse-flink-tm
+    depends_on:
+      - flink-jobmanager
+    command: taskmanager
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: 4
+        taskmanager.memory.process.size: 2048m
+        state.backend: rocksdb
+        state.checkpoints.dir: file:///opt/flink/checkpoints
+    volumes:
+      - flink-checkpoints:/opt/flink/checkpoints
+    networks:
+      - urbanpulse-network
+
+  # ============================================================
+  # SPARK — Master + Worker for Ward Energy Analytics
+  # ============================================================
+  spark-master:
+    image: apache/spark:3.5.0
+    hostname: spark-master
+    container_name: urbanpulse-spark-master
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --host spark-master --port 7077 --webui-port 8080
+    volumes:
+      - spark-data:/opt/spark/data
+      - parquet-output:/opt/spark/output
+    networks:
+      - urbanpulse-network
+
+  spark-worker:
+    image: apache/spark:3.5.0
+    hostname: spark-worker
+    container_name: urbanpulse-spark-worker
+    depends_on:
+      - spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    volumes:
+      - spark-data:/opt/spark/data
+      - parquet-output:/opt/spark/output
+    networks:
+      - urbanpulse-network
+
+  # ============================================================
+  # TimescaleDB — Time-Series Storage for Sensor Data
+  # ============================================================
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    hostname: timescaledb
+    container_name: urbanpulse-timescaledb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: urbanpulse
+      POSTGRES_PASSWORD: urbanpulse_2026
+      POSTGRES_DB: urbanpulse_db
+    volumes:
+      - timescale-data:/var/lib/postgresql/data
+    networks:
+      - urbanpulse-network
+
+  # ============================================================
+  # MinIO — S3-Compatible Object Storage for Parquet Archives
+  # ============================================================
+  minio:
+    image: minio/minio:latest
+    hostname: minio
+    container_name: urbanpulse-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: urbanpulse
+      MINIO_ROOT_PASSWORD: urbanpulse_2026
+    volumes:
+      - minio-data:/data
+    networks:
+      - urbanpulse-network
+
+  # ============================================================
+  # Grafana — Dashboards & Visualization
+  # ============================================================
+  grafana:
+    image: grafana/grafana-oss:10.4.0
+    hostname: grafana
+    container_name: urbanpulse-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: urbanpulse_2026
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - urbanpulse-network
+
+volumes:
+  kafka-data-1:
+  kafka-data-2:
+  kafka-data-3:
+  flink-checkpoints:
+  flink-savepoints:
+  spark-data:
+  parquet-output:
+  timescale-data:
+  minio-data:
+  grafana-data:
+
+networks:
+  urbanpulse-network:
+    driver: bridge
+    name: urbanpulse-network

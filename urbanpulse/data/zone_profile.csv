@@ -1,0 +1,21 @@
+zone,zone_name,population,num_schools,num_hospitals,area_sq_km
+Zone_North,Borivali-Dahisar,485000,142,18,45.2
+Zone_NorthWest,Kandivali-Malad,520000,156,22,38.7
+Zone_West,Bandra-Khar,410000,128,25,28.3
+Zone_Central,Dadar-Matunga,395000,134,30,22.1
+Zone_South,Colaba-Fort,280000,98,35,18.5
+Zone_East,Kurla-Chembur,445000,118,16,42.8
+Zone_NorthEast,Mulund-Bhandup,380000,108,14,36.4
+Zone_SouthEast,Sion-Wadala,350000,102,19,25.6
+Zone_Harbor,Vashi-CBD Belapur,290000,88,12,52.3
+Zone_Industrial,Vikhroli-Powai,345000,94,15,48.9
+Zone_SouthCentral,Lower Parel-Worli,310000,82,28,15.2
+Zone_WesternSuburb,Goregaon-Jogeshwari,420000,138,20,32.6
+Zone_TransHarbor,Thane-Airoli,480000,152,17,55.8
+Zone_Extended,Kalyan-Dombivli,390000,126,13,62.4
+Zone_Coastal,Juhu-Versova,265000,76,21,20.1
+Zone_Metro,Andheri-SEEPZ,510000,164,24,35.9
+Zone_Heritage,Girgaon-Marine Lines,195000,68,32,12.8
+Zone_Commercial,BKC-Santacruz,320000,92,26,18.4
+Zone_Suburban,Vasai-Virar,435000,132,11,72.5
+Zone_NewDev,Ulwe-Panvel,180000,54,8,85.3

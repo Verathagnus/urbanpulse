@@ -1,0 +1,42 @@
+# UrbanPulse — Python Dependencies
+# ============================================================
+# CRITICAL PYTHON VERSION REQUIREMENT (PYTHON 3.10 RECOMMENDED):
+# Because our Docker cluster runs Apache Flink 1.18.1 (`docker-compose.yml`),
+# `apache-flink==1.18.1` targets and publishes pre-built binary wheels (`.whl`)
+# specifically for Python 3.8, 3.9, and 3.10 (`cp310`).
+#
+# To install ALL dependencies instantly in under 5 seconds without compiling
+# C++/Java bridges or encountering setuptools/numpy build errors:
+#
+#   conda create -n urbanpulse python=3.10 -y
+#   conda activate urbanpulse
+#   pip install -r requirements.txt
+# ============================================================
+
+# Kafka Clients & Stream Processing
+confluent-kafka==2.3.0
+kafka-python-ng==2.2.3
+python-snappy==0.7.3
+faust-streaming==0.11.0
+aiokafka==0.10.0
+
+# Apache Flink (PyFlink for DataStream API)
+apache-flink==1.18.1
+
+# Apache Spark (PySpark for Structured Streaming & SQL)
+pyspark==3.5.0
+
+# Data Analysis & Formatting
+pandas>=1.4.0
+pyarrow>=7.0.0,<12.0.0
+numpy>=1.22.4,<1.25.0
+
+# Utilities & Logging
+python-dateutil==2.8.2
+requests==2.31.0
+
+# Interactive Testing Dashboard & Visualizations
+streamlit==1.31.0
+plotly==5.18.0
+lz4>=4.0.0
+cramjam>=2.7.0

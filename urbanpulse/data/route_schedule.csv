@@ -1,0 +1,111 @@
+route_id,stop_id,stop_sequence,scheduled_arrival_time,route_name,terminal,direction
+R_301_UP,STOP_001,1,06:00:00,Andheri-Borivali Express,Borivali Bus Depot,UP
+R_301_UP,STOP_002,2,06:08:00,Andheri-Borivali Express,Borivali Bus Depot,UP
+R_301_UP,STOP_003,3,06:15:00,Andheri-Borivali Express,Borivali Bus Depot,UP
+R_301_UP,STOP_004,4,06:22:00,Andheri-Borivali Express,Borivali Bus Depot,UP
+R_301_UP,STOP_005,5,06:30:00,Andheri-Borivali Express,Borivali Bus Depot,UP
+R_301_DN,STOP_005,1,06:05:00,Andheri-Borivali Express,Andheri Station,DN
+R_301_DN,STOP_004,2,06:13:00,Andheri-Borivali Express,Andheri Station,DN
+R_301_DN,STOP_003,3,06:20:00,Andheri-Borivali Express,Andheri Station,DN
+R_301_DN,STOP_002,4,06:28:00,Andheri-Borivali Express,Andheri Station,DN
+R_301_DN,STOP_001,5,06:35:00,Andheri-Borivali Express,Andheri Station,DN
+R_102_UP,STOP_010,1,05:30:00,Dadar-Bandra Circular,Bandra Terminus,UP
+R_102_UP,STOP_011,2,05:38:00,Dadar-Bandra Circular,Bandra Terminus,UP
+R_102_UP,STOP_012,3,05:45:00,Dadar-Bandra Circular,Bandra Terminus,UP
+R_102_UP,STOP_013,4,05:52:00,Dadar-Bandra Circular,Bandra Terminus,UP
+R_102_UP,STOP_014,5,06:00:00,Dadar-Bandra Circular,Bandra Terminus,UP
+R_102_DN,STOP_014,1,05:35:00,Dadar-Bandra Circular,Dadar TT Circle,DN
+R_102_DN,STOP_013,2,05:43:00,Dadar-Bandra Circular,Dadar TT Circle,DN
+R_102_DN,STOP_012,3,05:50:00,Dadar-Bandra Circular,Dadar TT Circle,DN
+R_102_DN,STOP_011,4,05:58:00,Dadar-Bandra Circular,Dadar TT Circle,DN
+R_102_DN,STOP_010,5,06:05:00,Dadar-Bandra Circular,Dadar TT Circle,DN
+R_205_UP,STOP_020,1,06:15:00,Kurla-Chembur Link,Chembur Naka,UP
+R_205_UP,STOP_021,2,06:22:00,Kurla-Chembur Link,Chembur Naka,UP
+R_205_UP,STOP_022,3,06:30:00,Kurla-Chembur Link,Chembur Naka,UP
+R_205_UP,STOP_023,4,06:37:00,Kurla-Chembur Link,Chembur Naka,UP
+R_205_UP,STOP_024,5,06:45:00,Kurla-Chembur Link,Chembur Naka,UP
+R_205_DN,STOP_024,1,06:20:00,Kurla-Chembur Link,Kurla Station West,DN
+R_205_DN,STOP_023,2,06:27:00,Kurla-Chembur Link,Kurla Station West,DN
+R_205_DN,STOP_022,3,06:35:00,Kurla-Chembur Link,Kurla Station West,DN
+R_205_DN,STOP_021,4,06:42:00,Kurla-Chembur Link,Kurla Station West,DN
+R_205_DN,STOP_020,5,06:50:00,Kurla-Chembur Link,Kurla Station West,DN
+R_410_UP,STOP_030,1,05:45:00,Thane-Mulund Shuttle,Mulund Check Naka,UP
+R_410_UP,STOP_031,2,05:52:00,Thane-Mulund Shuttle,Mulund Check Naka,UP
+R_410_UP,STOP_032,3,06:00:00,Thane-Mulund Shuttle,Mulund Check Naka,UP
+R_410_UP,STOP_033,4,06:08:00,Thane-Mulund Shuttle,Mulund Check Naka,UP
+R_410_UP,STOP_034,5,06:15:00,Thane-Mulund Shuttle,Mulund Check Naka,UP
+R_410_DN,STOP_034,1,05:50:00,Thane-Mulund Shuttle,Thane Station,DN
+R_410_DN,STOP_033,2,05:57:00,Thane-Mulund Shuttle,Thane Station,DN
+R_410_DN,STOP_032,3,06:05:00,Thane-Mulund Shuttle,Thane Station,DN
+R_410_DN,STOP_031,4,06:12:00,Thane-Mulund Shuttle,Thane Station,DN
+R_410_DN,STOP_030,5,06:20:00,Thane-Mulund Shuttle,Thane Station,DN
+R_507_UP,STOP_040,1,06:30:00,Powai-Vikhroli Industrial,Vikhroli MIDC,UP
+R_507_UP,STOP_041,2,06:38:00,Powai-Vikhroli Industrial,Vikhroli MIDC,UP
+R_507_UP,STOP_042,3,06:45:00,Powai-Vikhroli Industrial,Vikhroli MIDC,UP
+R_507_UP,STOP_043,4,06:53:00,Powai-Vikhroli Industrial,Vikhroli MIDC,UP
+R_507_UP,STOP_044,5,07:00:00,Powai-Vikhroli Industrial,Vikhroli MIDC,UP
+R_507_DN,STOP_044,1,06:35:00,Powai-Vikhroli Industrial,Powai Lake,DN
+R_507_DN,STOP_043,2,06:42:00,Powai-Vikhroli Industrial,Powai Lake,DN
+R_507_DN,STOP_042,3,06:50:00,Powai-Vikhroli Industrial,Powai Lake,DN
+R_507_DN,STOP_041,4,06:57:00,Powai-Vikhroli Industrial,Powai Lake,DN
+R_507_DN,STOP_040,5,07:05:00,Powai-Vikhroli Industrial,Powai Lake,DN
+R_603_UP,STOP_050,1,05:15:00,Goregaon-Malad Fast,Malad Station West,UP
+R_603_UP,STOP_051,2,05:22:00,Goregaon-Malad Fast,Malad Station West,UP
+R_603_UP,STOP_052,3,05:30:00,Goregaon-Malad Fast,Malad Station West,UP
+R_603_UP,STOP_053,4,05:37:00,Goregaon-Malad Fast,Malad Station West,UP
+R_603_UP,STOP_054,5,05:45:00,Goregaon-Malad Fast,Malad Station West,UP
+R_603_DN,STOP_054,1,05:20:00,Goregaon-Malad Fast,Goregaon Bus Depot,DN
+R_603_DN,STOP_053,2,05:27:00,Goregaon-Malad Fast,Goregaon Bus Depot,DN
+R_603_DN,STOP_052,3,05:35:00,Goregaon-Malad Fast,Goregaon Bus Depot,DN
+R_603_DN,STOP_051,4,05:42:00,Goregaon-Malad Fast,Goregaon Bus Depot,DN
+R_603_DN,STOP_050,5,05:50:00,Goregaon-Malad Fast,Goregaon Bus Depot,DN
+R_718_UP,STOP_060,1,06:00:00,Wadala-Sion Express,Sion Hospital,UP
+R_718_UP,STOP_061,2,06:07:00,Wadala-Sion Express,Sion Hospital,UP
+R_718_UP,STOP_062,3,06:15:00,Wadala-Sion Express,Sion Hospital,UP
+R_718_UP,STOP_063,4,06:22:00,Wadala-Sion Express,Sion Hospital,UP
+R_718_UP,STOP_064,5,06:30:00,Wadala-Sion Express,Sion Hospital,UP
+R_718_DN,STOP_064,1,06:05:00,Wadala-Sion Express,Wadala Depot,DN
+R_718_DN,STOP_063,2,06:12:00,Wadala-Sion Express,Wadala Depot,DN
+R_718_DN,STOP_062,3,06:20:00,Wadala-Sion Express,Wadala Depot,DN
+R_718_DN,STOP_061,4,06:27:00,Wadala-Sion Express,Wadala Depot,DN
+R_718_DN,STOP_060,5,06:35:00,Wadala-Sion Express,Wadala Depot,DN
+R_825_UP,STOP_070,1,05:00:00,Lower Parel-Worli Coastal,Worli Sea Face,UP
+R_825_UP,STOP_071,2,05:08:00,Lower Parel-Worli Coastal,Worli Sea Face,UP
+R_825_UP,STOP_072,3,05:15:00,Lower Parel-Worli Coastal,Worli Sea Face,UP
+R_825_UP,STOP_073,4,05:23:00,Lower Parel-Worli Coastal,Worli Sea Face,UP
+R_825_UP,STOP_074,5,05:30:00,Lower Parel-Worli Coastal,Worli Sea Face,UP
+R_825_DN,STOP_074,1,05:05:00,Lower Parel-Worli Coastal,Lower Parel TT,DN
+R_825_DN,STOP_073,2,05:12:00,Lower Parel-Worli Coastal,Lower Parel TT,DN
+R_825_DN,STOP_072,3,05:20:00,Lower Parel-Worli Coastal,Lower Parel TT,DN
+R_825_DN,STOP_071,4,05:27:00,Lower Parel-Worli Coastal,Lower Parel TT,DN
+R_825_DN,STOP_070,5,05:35:00,Lower Parel-Worli Coastal,Lower Parel TT,DN
+R_933_UP,STOP_080,1,06:10:00,Vashi-CBD Belapur Link,CBD Belapur Station,UP
+R_933_UP,STOP_081,2,06:18:00,Vashi-CBD Belapur Link,CBD Belapur Station,UP
+R_933_UP,STOP_082,3,06:25:00,Vashi-CBD Belapur Link,CBD Belapur Station,UP
+R_933_UP,STOP_083,4,06:33:00,Vashi-CBD Belapur Link,CBD Belapur Station,UP
+R_933_UP,STOP_084,5,06:40:00,Vashi-CBD Belapur Link,CBD Belapur Station,UP
+R_933_DN,STOP_084,1,06:15:00,Vashi-CBD Belapur Link,Vashi Bus Stand,DN
+R_933_DN,STOP_083,2,06:22:00,Vashi-CBD Belapur Link,Vashi Bus Stand,DN
+R_933_DN,STOP_082,3,06:30:00,Vashi-CBD Belapur Link,Vashi Bus Stand,DN
+R_933_DN,STOP_081,4,06:37:00,Vashi-CBD Belapur Link,Vashi Bus Stand,DN
+R_933_DN,STOP_080,5,06:45:00,Vashi-CBD Belapur Link,Vashi Bus Stand,DN
+R_044_UP,STOP_090,1,05:30:00,Colaba-Fort Heritage,Fort CST,UP
+R_044_UP,STOP_091,2,05:37:00,Colaba-Fort Heritage,Fort CST,UP
+R_044_UP,STOP_092,3,05:45:00,Colaba-Fort Heritage,Fort CST,UP
+R_044_UP,STOP_093,4,05:52:00,Colaba-Fort Heritage,Fort CST,UP
+R_044_UP,STOP_094,5,06:00:00,Colaba-Fort Heritage,Fort CST,UP
+R_044_DN,STOP_094,1,05:35:00,Colaba-Fort Heritage,Colaba Bus Depot,DN
+R_044_DN,STOP_093,2,05:42:00,Colaba-Fort Heritage,Colaba Bus Depot,DN
+R_044_DN,STOP_092,3,05:50:00,Colaba-Fort Heritage,Colaba Bus Depot,DN
+R_044_DN,STOP_091,4,05:57:00,Colaba-Fort Heritage,Colaba Bus Depot,DN
+R_044_DN,STOP_090,5,06:05:00,Colaba-Fort Heritage,Colaba Bus Depot,DN
+R_156_UP,STOP_100,1,06:45:00,Kandivali-Dahisar Ring,Dahisar East,UP
+R_156_UP,STOP_101,2,06:53:00,Kandivali-Dahisar Ring,Dahisar East,UP
+R_156_UP,STOP_102,3,07:00:00,Kandivali-Dahisar Ring,Dahisar East,UP
+R_156_UP,STOP_103,4,07:08:00,Kandivali-Dahisar Ring,Dahisar East,UP
+R_156_UP,STOP_104,5,07:15:00,Kandivali-Dahisar Ring,Dahisar East,UP
+R_156_DN,STOP_104,1,06:50:00,Kandivali-Dahisar Ring,Kandivali Station,DN
+R_156_DN,STOP_103,2,06:57:00,Kandivali-Dahisar Ring,Kandivali Station,DN
+R_156_DN,STOP_102,3,07:05:00,Kandivali-Dahisar Ring,Kandivali Station,DN
+R_156_DN,STOP_101,4,07:12:00,Kandivali-Dahisar Ring,Kandivali Station,DN
+R_156_DN,STOP_100,5,07:20:00,Kandivali-Dahisar Ring,Kandivali Station,DN

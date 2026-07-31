@@ -1,0 +1,102 @@
+%%{init: {'theme': 'base', 'flowchart': {'rankSpacing': 48, 'nodeSpacing': 15, 'curve': 'basis'}, 'themeVariables': {'subgraphPadding': 22}}}%%
+flowchart LR
+    %% Data Sources Layer
+    subgraph DATA_SOURCES["Data Sources — MetroConnect City Infrastructure<br/>"]
+        BUS["12,000 GPS-Equipped Buses"]
+        TRAFFIC["3,800 Traffic Signal Sensors"]
+        AQI["600 Air Quality Monitors"]
+        METER["1.1M Smart Electricity Meters"]
+    end
+
+    %% Ingestion Layer
+    subgraph INGESTION["Kafka Ingestion Layer — 3-Broker KRaft Cluster<br/>"]
+        T1["urbanpulse.bus_gps\n(12 Partitions, 24h Ret)"]
+        T2["urbanpulse.traffic_signals\n(6 Partitions, 7d Ret)"]
+        T3["urbanpulse.air_quality\n(4 Partitions, 90d Ret)"]
+        T4["urbanpulse.smart_meters\n(8 Partitions, 365d Ret)"]
+        DLQ_ROUTER["DLQ Validation Router"]
+        DLQ_TOPIC["urbanpulse.dlq\n(3 Partitions, 30d Ret)"]
+    end
+
+    %% Kafka Streams Enrichment
+    subgraph STREAM_ENRICHMENT["Kafka Streams — Real-Time Enrichment<br/>"]
+        KS["Kafka Streams / Faust App\n(Join GPS with CSV KTable)"]
+        ENRICHED["urbanpulse.enriched_bus_gps\n(Enriched Route Info)"]
+    end
+
+    %% Speed Layer
+    subgraph SPEED_LAYER["Speed Layer — Apache Flink (Real-Time Incidents)<br/>"]
+        F1["AQI Emergency Detector\n(AQI > 300 alert in 2m)"]
+        F2["Traffic Gridlock Detector\n(avg_wait > 180s for 3 cycles)"]
+        F3["Bus Bunching Detector\n(Haversine < 200m for > 5 min)"]
+        INCIDENTS["urbanpulse.incidents\n(Real-Time Emergency Alerts)"]
+    end
+
+    %% Batch Layer
+    subgraph BATCH_LAYER["Batch Layer — Apache Spark<br/>"]
+        S1["Spark Structured Streaming\n(Smart Meters 15-min Rollups)"]
+        S2["Spark Streaming SQL\n(10-min Rolling Avg AQI)"]
+        S3["Spark Batch Jobs\n(Weekly/Monthly Reports)"]
+    end
+
+    %% Storage Layer
+    subgraph STORAGE["Storage Layer — Purpose-Built Databases<br/>"]
+        TS[(TimescaleDB\nTime-Series Sensors)]
+        GEO[(PostGIS / PostgreSQL\nGeospatial Bus Positions)]
+        PARQUET[(Apache Parquet on MinIO\nHistorical Archives)]
+        DRUID[(Apache Druid\nCouncillor Aggregates)]
+    end
+
+    %% Serving Layer
+    subgraph SERVING["Serving Layer — Dashboards, APIs & Control<br/>"]
+        GRAFANA["Grafana Dashboards\n(Live Visualizations)"]
+        API["FastAPI REST APIs\n(ETA / Health APIs)"]
+        SIGNAL_CTRL["Signal Control Interface\n(Adaptive timing)"]
+        ALERT["Alert & Notification Service\n(SMS/Email Warnings)"]
+    end
+
+    %% Connections
+    BUS --> T1
+    TRAFFIC --> T2
+    AQI --> T3
+    METER --> T4
+
+    %% Validation DLQ (inside ingestion subgraph now)
+    T1 -.-> DLQ_ROUTER
+    T3 -.-> DLQ_ROUTER
+    DLQ_ROUTER --> DLQ_TOPIC
+
+    %% Ingestion to Processing
+    T1 --> KS
+    KS --> ENRICHED
+
+    T3 --> F1
+    T2 --> F2
+    ENRICHED --> F3
+
+    F1 --> INCIDENTS
+    F2 --> INCIDENTS
+    F3 --> INCIDENTS
+
+    T4 --> S1
+    T3 --> S2
+    T1 & T2 & T3 & T4 --> S3
+
+    %% Processing to Storage
+    INCIDENTS --> TS
+    INCIDENTS --> GEO
+    S1 --> ENERGY["urbanpulse.ward_energy_summary"] --> TS
+    S2 --> ADVISORY["urbanpulse.health_advisories"] --> TS
+    S1 --> PARQUET
+    S3 --> PARQUET
+    S3 --> DRUID
+
+    %% Storage to Serving
+    TS --> GRAFANA
+    GEO --> API
+    TS --> API
+    DRUID --> GRAFANA
+    PARQUET --> GRAFANA
+    ENRICHED --> GEO
+    INCIDENTS --> SIGNAL_CTRL
+    INCIDENTS --> ALERT
